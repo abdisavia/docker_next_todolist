@@ -49,10 +49,10 @@ export default function List({title,statusDef,id}) {
     async function handleActionDelete(id){
         try{
             setLoading(true);
-            setTimeout(() => {
-                handleDelete(id);
+            await handleDelete(id);
+            setTimeout(async() => {
                 setLoading(false);
-                window.location.href = "/"
+                // window.location.href = "/"
             },5000)
         }catch(e){
             console.log(e.message);
@@ -62,9 +62,9 @@ export default function List({title,statusDef,id}) {
     return(
         <div className={" w-3/4 h-28 p-5 mx-auto shadow-xl bg-white rounded-xl grid grid-cols-7 mb-5".concat(containerColor())}>
             <div className="col-span-5 flex items-center ">
-                <h1 className="block max-w-full text-clamp-1 truncate break-all font-bold text-3xl">{title}</h1>
+                <h1 className="block max-w-full text-clamp-1 truncate break-all font-bold text-3xl text-black">{title}</h1>
             </div>
-            <div className="flex items-center justify-end col-span-2 gap-5 px-5">
+            <div className="flex items-center justify-end col-span-2 gap-5 px-5 text-black">
                 <select className={" bg-transparent w-full py-2 border-b-2 outline-none".concat(statusColor())} onChange={handleStatusChange} value={status}>
                     <option value="" disabled={true}>status</option>
                     <option value="done">Done</option>

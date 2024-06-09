@@ -1,0 +1,33 @@
+FROM node:20.14-alpine as builder
+
+ENV API_URL="http://172.20.95.3:8080"
+
+WORKDIR /app
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+RUN npx prisma generate
+
+RUN npm run build
+
+FROM node:20.14-alpine
+
+WORKDIR /app
+
+ENV NODE_ENV production
+ENV HOSTNAME "0.0.0.0"
+
+
+# COPY --from=builder /app/node_modules node_modules
+# COPY --from=builder /app/prisma /prisma
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/.next/standalone ./
+# RUN npx prisma generate
+
+EXPOSE 3000
+
+CMD [ "node","server.js" ]

@@ -1,11 +1,16 @@
+
 export async function getALLData(){
-    const response = await fetch("/api/todolist/getAllData",{
-        method:"GET",
-        headers:{
-            "Content-Type":"application/json"
-        },
-    })
-    return await response.json();
+    try{
+        const response = await fetch(`http://172.20.95.3:8080/api/todolist/getAllData`,{
+            method:"GET",
+            headers:{
+                "Content-Type":"application/json"
+            },
+        })
+        return await response.json();
+    }catch(e){
+        console.log(e.message)
+    }
 }
 
 export async function handleCreate(e){
@@ -15,7 +20,7 @@ export async function handleCreate(e){
         status:"pending"
     }
     console.log(data);
-    const response = await fetch("/api/todolist/add",{
+    const response = await fetch(`http://172.20.95.3:8080/api/todolist/add`,{
         method:"POST",
         header:{
             "Content-Type":"application/json"
@@ -27,11 +32,8 @@ export async function handleCreate(e){
 
 export async function handleDelete(id){
     try{
-        const response = await fetch(`/api/todolist/delete/${id}`,{
+        const response = await fetch(`http://172.20.95.3:8080/api/todolist/delete/${id}`,{
             method:"DELETE",
-            headers:{
-                "Content-Type":"application/json"
-            }
         })
         return response;
     }catch(e){

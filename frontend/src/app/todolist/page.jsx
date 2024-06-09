@@ -41,7 +41,7 @@ export default function Todolist() {
             <div className="p-5 w-auto ">
                 <div className="flex justify-center mt-12 sticky top-14" >
                     <form className="bg-white p-5 shadow-md border-b-2 border-cyan-600 rounded-md" action={formSubmit}>
-                        <input type="text" name="title" className="w-[500px] h-[40px] text-xl ps-2 border-b-2 border-cyan-600 focus:outline-none" placeholder="ketik disini" required/>
+                        <input type="text" name="title" className="w-[500px] h-[40px] text-xl ps-2 border-b-2 border-cyan-600 focus:outline-none text-black" placeholder="ketik disini" required/>
                         <button type="submit" disabled={loading} className="w-[100px] h-[40px] border-2 border-cyan-600 hover:border-transparent disabled:opacity-35 hover:bg-green-400 hover:text-white ms-2 rounded-md text-cyan-600">Tambah</button>
                     </form>
                 </div>

@@ -1,0 +1,51 @@
+services:
+  frontend:
+    container_name: frontend
+    build: 
+      context: ./frontend
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      privateNet: 
+          ipv4_address: 172.20.95.4
+    depends_on:
+      - db
+      - backend
+
+  backend:
+    container_name: backend
+    build: 
+      context: ./Backend
+      dockerfile: dockerfile
+    networks:
+      privateNet:
+        ipv4_address: 172.20.95.3
+    environment:
+      - PORT="${BACKEND_PORT}
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_DATABASE}
+    volumes:
+      - todolist_vlm:/var/lib/mysql
+    networks:
+      privateNet :
+        ipv4_address: 172.20.95.2
+
+networks:
+  privateNet:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.20.95.0/24"
+
+volumes:
+  todolist_vlm:
