@@ -50,10 +50,8 @@ export default function List({title,statusDef,id}) {
         try{
             setLoading(true);
             await handleDelete(id);
-            setTimeout(async() => {
-                setLoading(false);
-                // window.location.href = "/"
-            },5000)
+            window.location.href="/";
+            setLoading(false);
         }catch(e){
             console.log(e.message);
         }
