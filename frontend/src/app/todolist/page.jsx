@@ -19,17 +19,12 @@ export default function Todolist() {
         getData();
     },[])
 
-    // useEffect(() => {
-    //     RenderList();
-    // },[loading])
-
 
 
     const formSubmit = async(e) => {
         setLoading(true);
         const res = await handleCreate(e)
         getData();
-        
         setLoading(false);
     }
 
