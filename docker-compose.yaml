@@ -22,8 +22,6 @@ services:
     build: 
       context: ./frontend
       dockerfile: dockerfile
-    ports:
-      - 3000:3000
     networks:
       privateNet: 
           ipv4_address: 172.20.95.4
@@ -47,8 +45,6 @@ services:
   db:
     container_name: db
     image: mysql:8.0
-    ports:
-      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
