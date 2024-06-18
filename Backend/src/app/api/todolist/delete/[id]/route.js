@@ -3,19 +3,9 @@ import prisma from "@/lib/prisma";
 export async function DELETE(req, {params}){
     try{
         const id =  params.id ;
-
-        console.log(id);
-        
-        // return Response.json(id);
-
-        // // console.log(id)
-        // // if(isNaN(id)){
-        // //     throw new Error("Invalid Id")
-        // // }
-
         const response = await prisma.listtodo.delete({
             where:{
-                id:Number(id)
+                id: Number(id)
             }
         })
         return Response.json(response);

@@ -1,4 +1,4 @@
 docker compose down
 docker image rm docker_next_todolist-backend docker_next_todolist-frontend
-docker volume prune
+docker volume rm docker_next_todolist_todolist_vlm
 docker network prune

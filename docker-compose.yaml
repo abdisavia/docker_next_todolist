@@ -1,11 +1,27 @@
 services:
+  nginx:
+    container_name: nginx
+    build: 
+      context: ./nginx/
+      dockerfile: Dockerfile
+    environment:
+      CLIENT_PORT: ${FRONTEND_PORT}
+      API_PORT: ${BACKEND_PORT}
+    ports:
+      - '80:80'
+    networks:
+      privateNet:
+        ipv4_address: 172.20.95.5
+    depends_on:
+      - frontend
+      - backend
+    
+
   frontend:
     container_name: frontend
     build: 
       context: ./frontend
       dockerfile: dockerfile
-    ports:
-      - 3000:3000
     networks:
       privateNet: 
           ipv4_address: 172.20.95.4
@@ -22,15 +38,13 @@ services:
       privateNet:
         ipv4_address: 172.20.95.3
     environment:
-      - PORT="${BACKEND_PORT}
+      - PORT=${BACKEND_PORT}
     depends_on:
       - db
 
   db:
     container_name: db
     image: mysql:8.0
-    ports:
-      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=${DB_DATABASE}
